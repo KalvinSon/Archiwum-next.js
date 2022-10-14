@@ -7,6 +7,18 @@ import CardHeader from '@mui/material/CardHeader'
 // ** Data Import
 import { rows } from 'src/@fake-db/table/static-data'
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { plPL } from '@mui/material/locale';
+
+const theme = createTheme(
+  {
+    palette: {
+      primary: { main: '#1976d2' },
+    },
+  },
+  plPL,
+);
+
 const columns = [
   {
     flex: 0.05,
@@ -50,8 +62,10 @@ const TableBasic = () => {
   return (
     <Card>
       <CardHeader title='Moje Firmy' />
-      <Box sx={{ height: 608 }}>
-        <DataGrid columns={columns} rows={rows.slice(0, 10)} />
+      <Box sx={{ height: 632 }}>
+        <ThemeProvider theme={theme}>
+          <DataGrid columns={columns} rows={rows.slice(0, 10)} />
+        </ThemeProvider>;
       </Box>
     </Card>
   )

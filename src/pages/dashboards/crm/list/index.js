@@ -70,6 +70,18 @@ import CrmMostSalesInCountries from "src/views/dashboards/crm/CrmMostSalesInCoun
 
 import AdvertBlock from "src/pages/components/advert";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { plPL } from '@mui/material/locale';
+
+const theme = createTheme(
+  {
+    palette: {
+      primary: { main: '#1976d2' },
+    },
+  },
+  plPL,
+);
+
 const store = { data: {} };
 
 /* eslint-disable */
@@ -270,20 +282,22 @@ const CrmDashboard = () => {
         <Grid item xs={12}>
           <Card>
           <CardHeader title='Aktualnie Procedowane Wnioski' />
-            <DataGrid
-              autoHeight
-              pagination
-              rows={store.data
-                .filter((el) => el.invoiceStatus === "Draft")
-                .slice(0, 2)}
-              columns={columns}
-              disableSelectionOnClick
-              pageSize={Number(pageSize)}
-              rowsPerPageOptions={[10, 25, 50]}
-              sx={{ "& .MuiDataGrid-columnHeaders": { borderRadius: 0 } }}
-              onSelectionModelChange={(rows) => setSelectedRows(rows)}
-              onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            />
+            <ThemeProvider theme={theme}>
+              <DataGrid
+                autoHeight
+                pagination
+                rows={store.data
+                  .filter((el) => el.invoiceStatus === "Draft")
+                  .slice(0, 2)}
+                columns={columns}
+                disableSelectionOnClick
+                pageSize={Number(pageSize)}
+                rowsPerPageOptions={[10, 25, 50]}
+                sx={{ "& .MuiDataGrid-columnHeaders": { borderRadius: 0 } }}
+                onSelectionModelChange={(rows) => setSelectedRows(rows)}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+              />
+            </ThemeProvider>
           </Card>
         </Grid>
       </Grid>
