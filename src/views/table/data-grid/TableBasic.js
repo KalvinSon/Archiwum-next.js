@@ -50,7 +50,7 @@ const TableBasic = () => {
   return (
     <Card>
       <CardHeader title='Moje Firmy' />
-      <Box sx={{ height: 500 }}>
+      <Box sx={{ height: 608 }}>
         <DataGrid columns={columns} rows={rows.slice(0, 10)} />
       </Box>
     </Card>

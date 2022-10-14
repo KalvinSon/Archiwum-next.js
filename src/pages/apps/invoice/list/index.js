@@ -60,6 +60,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePickerWrapper from "src/@core/styles/libs/react-datepicker";
 import { useTranslation } from "react-i18next";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { plPL } from '@mui/material/locale';
+
+const theme = createTheme(
+  {
+    palette: {
+      primary: { main: '#1976d2' },
+    },
+  },
+  plPL,
+);
+
 // ** Styled component for the link in the dataTable
 const StyledLink = styled("a")(({ theme }) => ({
   textDecoration: "none",
@@ -471,19 +483,21 @@ const InvoiceList = () => {
             handleFilter={handleFilter}
           />
 
-          <DataGrid
-            labelRowsPerPage="asd:" // @TODO Translation
-            autoHeight
-            pagination
-            rows={store.data}
-            columns={columns}
-            disableSelectionOnClick
-            pageSize={Number(pageSize)}
-            rowsPerPageOptions={[5, 10]}
-            sx={{ "& .MuiDataGrid-columnHeaders": { borderRadius: 0 } }}
-            onSelectionModelChange={(rows) => setSelectedRows(rows)}
-            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          />
+          <ThemeProvider theme={theme}>          
+            <DataGrid
+              labelRowsPerPage="asd:" // @TODO Translation
+              autoHeight
+              pagination
+              rows={store.data}
+              columns={columns}
+              disableSelectionOnClick
+              pageSize={Number(pageSize)}
+              rowsPerPageOptions={[5, 10]}
+              sx={{ "& .MuiDataGrid-columnHeaders": { borderRadius: 0 } }}
+              onSelectionModelChange={(rows) => setSelectedRows(rows)}
+              onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            />
+          </ThemeProvider>;
         </Card>
       </Grid>
     </Grid>
